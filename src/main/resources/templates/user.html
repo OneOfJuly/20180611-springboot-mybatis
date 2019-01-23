@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+    <!--
+        在springboot中，是默认不支持jsp的，默认只支持thymeleaf模板，虽然可以集成jsp，但是不建议使用
+        使用thymeleaf的条件:
+            1.导入jar包(springboot自带的)
+            2.springboot会默认从templates文件夹(resources根目录下)在加载html页面
+            3.使用thymleaf的时候需要添加一些namespace的支持
+            4.在controller中如果需要传递对象到html页面上，则需要使用ModelMap对象传递，不能再使用Model了
+            5.当使用thymeleaf模板的时候，必须要按照严格的html语法进行执行，否则直接会报错！
+            6.当需要接收controller所传递的对象的时候，必须要thymeleaf命名空间(th)
+            7.当需要把对象的值显示在页面上的时候必须要使用命名空间+EL表达式配合
+    -->
+<h1>This is User Page</h1>
+
+    <input th:if="${user.username} == wangwang" type="text" name="username" th:value="${user.username}" />
+</body>
+</html>

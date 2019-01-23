@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+    <h1>This is User List Page</h1>
+    <table border="1px solid black">
+        <!--
+            在thymeleaf中，只有form表单中的元素才能使用value？
+                只有带value属性的标签才可以使用value，否则不可以
+                所有html标签中th可以标识的属性只有是自带的，如果该标签没有携带这个属性，则不可以使用th
+                <a th:href="">
+            在thymeleaf中，绝对不能使用jsp中任何一点语法知识，因为thymeleaf不认识
+        -->
+        <thead>
+            <tr>
+                <th>用户编号</th>
+                <th>用户名</th>
+                <th>用户密码</th>
+                <th>用户头像</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user,userStat:${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.password}"></td>
+                <td th:text="${user.headPic}"></td>
+                <!--
+                    当使用thymeleaf模板往controller中传递参数的时候，必须遵循thymeleaf语法规则
+                    使用@{}符号进行传递，{}里面写需要访问的controller路径(@RequestMapping的值)，如果需要传递参数的时候
+                    使用{()}
+                -->
+                <td><a th:href="@{deleteById(id=${user.id})}">删除</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a>修改</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
